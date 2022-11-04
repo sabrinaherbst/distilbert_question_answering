@@ -54,3 +54,26 @@
 - Kwiatkowski et al. Natural Questions: a Benchmark for Question Answering Research. 2019. https://ai.google.com/research/NaturalQuestions/: **Natural Questions**
   - Also a question-answer set, based on a Google query and corresponding Wikipedia page, containing the answer. 
   - Very similar to the SQuAD dataset. 
+  
+## Goal
+As the DistilBERT model was difficult to train, I will focus on the Question Answering model for the following. The DistilBERT model can be found in `distilbert.ipynb` and is fully functional, still, training required too many resources.
+
+* Error Metric:
+  * We use the CrossEntropy loss to train the QA model
+  * Afterwards, we will fall back to F-1 score and the Exact Match (EM). These are also the metrics used for the SQuAD competition. (https://rajpurkar.github.io/SQuAD-explorer/).
+  * The definitions are retrieved from here (https://qa.fastforwardlabs.com/no%20answer/null%20threshold/bert/distilbert/exact%20match/f1/robust%20predictions/2020/06/09/Evaluating_BERT_on_SQuAD.html#Metrics-for-QA).
+  * EM: 1 if the prediction exactly matches the original, 0 otherwise
+  * F-1: Computed over the individual words in the prediction against those in the answer. Number of shared words is the key. Precision: Ratio of shared words to the number of words in the prediction. Recall: Ratio of shared words to number of words in GT.
+* Target for Error Metric:
+  * Currently about rank 80 in the leaderboard.
+  * EM: 0.7
+  * F-1: 0.75
+* Achieved value:
+  * EM: WIP
+  * F-1: WIP
+* Amount of time for each task:
+  * DistilBERT model: ~20h (without training time). This was very similar to what I estimated, because I relied heavily on the Huggingface library. Loading the data was easy and the data is already very clean.
+  * QA model: WIP
+  * Application: 
+  * Report:
+  * Presentation:
