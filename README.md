@@ -18,6 +18,49 @@
 4. Report - 2h
 5. Presentation - 2h
 
+
+  
+## Goal
+The DistilBERT model was quite straightforward to train, I mostly used what HuggingFace provided anyways, so the only real challenge here was to download the dataset. Also, training is a lot of effort, so I wasn't able to train it to full convergence, as I just didn't have the resource. The DistilBERT model can be found in `distilbert.ipynb` and is fully functional.
+* Error Metric: I landed at about 0.2 CrossEntropyLoss for both training and test set. The preconfiguration is quite good, as it didn't overfit. 
+* DistilBERT is primarily trained for masked prediction, I ran some manual sanity tests, to see which words are predicted. They usually make sense (although not entirely sometimes) and the grammatics are usually quite correct too. 
+  * e.g. "It seems important to tackle the climate [MSK]." gave change (19%), crisis (12%), issues (5.8%), which are all appropriate in the context.
+
+Now for the Question Answering model.
+
+* Error Metric:
+  * We use the CrossEntropy loss to train the QA model
+  * Afterwards, we will fall back to F-1 score and the Exact Match (EM). These are also the metrics used for the SQuAD competition. (https://rajpurkar.github.io/SQuAD-explorer/).
+  * The definitions are retrieved from here (https://qa.fastforwardlabs.com/no%20answer/null%20threshold/bert/distilbert/exact%20match/f1/robust%20predictions/2020/06/09/Evaluating_BERT_on_SQuAD.html#Metrics-for-QA).
+  * EM: 1 if the prediction exactly matches the original, 0 otherwise
+  * F-1: Computed over the individual words in the prediction against those in the answer. Number of shared words is the key. Precision: Ratio of shared words to the number of words in the prediction. Recall: Ratio of shared words to number of words in GT.
+* Target for Error Metric:
+  * Currently about rank 80 in the leaderboard.
+  * EM: 0.6
+  * F-1: 0.7
+* Achieved value:
+  * EM: WIP
+  * F-1: WIP
+  
+
+Amount of time for each task:
+  * DistilBERT model: ~20h (without training time). This was very similar to what I estimated, because I relied heavily on the Huggingface library. Loading the data was easy and the data is already very clean.
+  * QA model: ~40h (without training time). Was a lot of effort, as my first approach didn't work and it took me making up a basic POC model, to get to the final architecture.
+  
+## Data
+- Aaron Gokaslan et al. OpenWebText Corpus. 2019. https://skylion007.github.io/OpenWebTextCorpus/: **OpenWebText**
+  - Open source replication of the WebText dataset from OpenAI. 
+  - They scraped web pages, with a focus on quality. They looked at the Reddit up- and downvotes to determine the quality of the resource. 
+  - The dataset will be used to train the DistilBERT model using language masking.
+- Rajpurkar et al. SQuAD: 100,000+ Questions for Machine Comprehension of Text. 2016. https://rajpurkar.github.io/SQuAD-explorer/): **SQuAD**
+  - Standford Question Answering Dataset 
+  - Collection of question-answer pairs, where the answer is a sequence of tokens in the given context text. 
+  - Very diverse because it was created using crowdsourcing.
+- Kwiatkowski et al. Natural Questions: a Benchmark for Question Answering Research. 2019. https://ai.google.com/research/NaturalQuestions/: **Natural Questions**
+  - Also a question-answer set, based on a Google query and corresponding Wikipedia page, containing the answer. 
+  - Very similar to the SQuAD dataset. 
+ 
+ 
 ## Related Papers
 - Sanh, Victor et al. DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter. ArXiv abs/1910.01108. 2019.: https://arxiv.org/abs/1910.01108v4
   - The choice of DistilBERT, as opposed to BERT, RoBERTa or XLNet is primarily based on the size of the network and training time
@@ -42,38 +85,3 @@
   - The authors test an architecture, where they fine-tune the BERT model and one where they fix the weights and add a specific head on top
   - They conclude: "Results in Table 4 indicate that both strategies have abilities of improving the performance of SLU model."
 
-## Data
-- Aaron Gokaslan et al. OpenWebText Corpus. 2019. https://skylion007.github.io/OpenWebTextCorpus/: **OpenWebText**
-  - Open source replication of the WebText dataset from OpenAI. 
-  - They scraped web pages, with a focus on quality. They looked at the Reddit up- and downvotes to determine the quality of the resource. 
-  - The dataset will be used to train the DistilBERT model using language masking.
-- Rajpurkar et al. SQuAD: 100,000+ Questions for Machine Comprehension of Text. 2016. https://rajpurkar.github.io/SQuAD-explorer/): **SQuAD**
-  - Standford Question Answering Dataset 
-  - Collection of question-answer pairs, where the answer is a sequence of tokens in the given context text. 
-  - Very diverse because it was created using crowdsourcing.
-- Kwiatkowski et al. Natural Questions: a Benchmark for Question Answering Research. 2019. https://ai.google.com/research/NaturalQuestions/: **Natural Questions**
-  - Also a question-answer set, based on a Google query and corresponding Wikipedia page, containing the answer. 
-  - Very similar to the SQuAD dataset. 
-  
-## Goal
-As the DistilBERT model was difficult to train, I will focus on the Question Answering model for the following. The DistilBERT model can be found in `distilbert.ipynb` and is fully functional, still, training required too many resources.
-
-* Error Metric:
-  * We use the CrossEntropy loss to train the QA model
-  * Afterwards, we will fall back to F-1 score and the Exact Match (EM). These are also the metrics used for the SQuAD competition. (https://rajpurkar.github.io/SQuAD-explorer/).
-  * The definitions are retrieved from here (https://qa.fastforwardlabs.com/no%20answer/null%20threshold/bert/distilbert/exact%20match/f1/robust%20predictions/2020/06/09/Evaluating_BERT_on_SQuAD.html#Metrics-for-QA).
-  * EM: 1 if the prediction exactly matches the original, 0 otherwise
-  * F-1: Computed over the individual words in the prediction against those in the answer. Number of shared words is the key. Precision: Ratio of shared words to the number of words in the prediction. Recall: Ratio of shared words to number of words in GT.
-* Target for Error Metric:
-  * Currently about rank 80 in the leaderboard.
-  * EM: 0.7
-  * F-1: 0.75
-* Achieved value:
-  * EM: WIP
-  * F-1: WIP
-* Amount of time for each task:
-  * DistilBERT model: ~20h (without training time). This was very similar to what I estimated, because I relied heavily on the Huggingface library. Loading the data was easy and the data is already very clean.
-  * QA model: WIP
-  * Application: 
-  * Report:
-  * Presentation:
