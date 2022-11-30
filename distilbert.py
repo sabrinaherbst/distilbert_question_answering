@@ -15,8 +15,7 @@ class Dataset(torch.utils.data.Dataset):
         self.current_file = 1
         self.remaining = len(self.data)
         self.encodings = self.get_encodings(self.data)
-        
-        
+
     def __len__(self):
         """
         returns the lenght of the ds
@@ -74,6 +73,15 @@ class Dataset(torch.utils.data.Dataset):
         return {key: tensor[i%10000] for key, tensor in self.encodings.items()}  
 
 def test_model(model, optim, test_ds_loader, device):
+    """
+    This function tests whether the parameters of the model that are frozen change, the ones that are not frozen do change,
+    and whether any parameters become NaN or Inf
+    :param model: model to be tested
+    :param optim: optimiser used for training
+    :param test_ds_loader: dataset to perform the forward pass on
+    :param device: current device
+    :raises Exception: if any of the above conditions are not met
+    """
     ## Check if non-frozen parameters changed and frozen ones did not
 
     # get initial parameters to check against

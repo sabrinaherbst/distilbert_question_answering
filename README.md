@@ -2,6 +2,22 @@
 - Sabrina Herbst
 - Project Type: Bring your own method
 
+## Structure
+- `data/` contains the data used for the project (after running `load_data.py`, and downloading the natural questions)
+- `distilbert.py` contains the code for the DistilBERT model and the Dataset. A function for testing the functionality is in there too.
+- `distilbert.ipynb` contains the creation and training of the DistilBERT model
+- `load_data.py` contains the code for loading the data and preprocessing it. We also split it up into smaller files to load in the Dataset later on.
+- `qa_model.py` contains the code for thee different QA models. We also define a separate Dataset class in there and a method for testing the models.
+- `qa_model.ipynb` contains the creation and training of the QA models.
+- `requirements.txt` contains the requirements for the project
+- `utils.py` contains some helper functions for the project. It contains the functions to evaluate the models and a way to visualise the trained parameters for each model.
+
+## How to run
+- Install the requirements with `pip install -r requirements.txt`
+- Run `load_data.py` to download the data and preprocess it (follow the documentation in the file regarding the natural questions dataset)
+- Run `distilbert.ipynb` to train the DistilBERT model
+- Run `qa_model.ipynb` to train the QA models
+
 ## Project
 1. Create own DistilBERT Model using the OpenWebText dataset from Huggingface (https://huggingface.co/datasets/openwebtext) - 20h (active work, training is a lot longer)
    - I initially wanted to use the Oscar dataset (https://huggingface.co/datasets/oscar), but it took too much storage
@@ -35,13 +51,11 @@ Now for the Question Answering model.
   * EM: 1 if the prediction exactly matches the original, 0 otherwise
   * F-1: Computed over the individual words in the prediction against those in the answer. Number of shared words is the key. Precision: Ratio of shared words to the number of words in the prediction. Recall: Ratio of shared words to number of words in GT.
 * Target for Error Metric:
-  * Currently about rank 80 in the leaderboard.
   * EM: 0.6
   * F-1: 0.7
-* Achieved value:
-  * EM: WIP
-  * F-1: WIP
-  
+* Achieved value: I almost achieved the target for both of the measurements. I ultimately quit I had already spent a lot of time on the project and though that the results were reasonable.
+  * EM: 0.52
+  * F-1: 0.67
 
 Amount of time for each task:
   * DistilBERT model: ~20h (without training time). This was very similar to what I estimated, because I relied heavily on the Huggingface library. Loading the data was easy and the data is already very clean.
