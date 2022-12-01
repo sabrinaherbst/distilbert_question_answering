@@ -53,7 +53,7 @@ Now for the Question Answering model.
 * Target for Error Metric:
   * EM: 0.6
   * F-1: 0.7
-* Achieved value: I almost achieved the target for both of the measurements. I ultimately quit I had already spent a lot of time on the project and though that the results were reasonable.
+* Achieved value: I almost achieved the target for both of the measurements. I ultimately quit I had already spent a lot of time on the project and thought that the results were reasonable.
   * EM: 0.52
   * F-1: 0.67
 
