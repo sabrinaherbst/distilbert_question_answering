@@ -6,6 +6,8 @@
 - `data/` contains the data used for the project (after running `load_data.py`, and downloading the natural questions)
 - `distilbert.py` contains the code for the DistilBERT model and the Dataset. A function for testing the functionality is in there too.
 - `distilbert.ipynb` contains the creation and training of the DistilBERT model
+- `distilbert.model` is the distilbert model
+- `distilbert_reuse.model` is the question answering model
 - `load_data.py` contains the code for loading the data and preprocessing it. We also split it up into smaller files to load in the Dataset later on.
 - `qa_model.py` contains the code for thee different QA models. We also define a separate Dataset class in there and a method for testing the models.
 - `qa_model.ipynb` contains the creation and training of the QA models.
