@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import torch
-from transformers import DistilBertTokenizer, AutoModelForQuestionAnswering, DistilBertForMaskedLM
+from transformers import DistilBertTokenizer, DistilBertForMaskedLM
 
 from qa_model import ReuseQuestionDistilBERT
 
@@ -13,7 +13,7 @@ def load_model():
     model = m
     del mod
     del m
-    tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
+    tokenizer = DistilBertTokenizer.from_pretrained('qa_tokenizer')
     return model, tokenizer
 
 
