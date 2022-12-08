@@ -13,12 +13,14 @@
 - `qa_model.ipynb` contains the creation and training of the QA models.
 - `requirements.txt` contains the requirements for the project
 - `utils.py` contains some helper functions for the project. It contains the functions to evaluate the models and a way to visualise the trained parameters for each model.
+- `application.py` contains the streamlit application to run everything
 
 ## How to run
 - Install the requirements with `pip install -r requirements.txt`
 - Run `load_data.py` to download the data and preprocess it (follow the documentation in the file regarding the natural questions dataset)
 - Run `distilbert.ipynb` to train the DistilBERT model
 - Run `qa_model.ipynb` to train the QA models
+- Run `streamlit run application.py` to run the streamlit app
 
 ## Project
 1. Create own DistilBERT Model using the OpenWebText dataset from Huggingface (https://huggingface.co/datasets/openwebtext) - 20h (active work, training is a lot longer)
@@ -35,8 +37,6 @@
    - Will contain some SQuAD questions as examples.
 4. Report - 2h
 5. Presentation - 2h
-
-
   
 ## Goal
 The DistilBERT model was quite straightforward to train, I mostly used what HuggingFace provided anyways, so the only real challenge here was to download the dataset. Also, training is a lot of effort, so I wasn't able to train it to full convergence, as I just didn't have the resource. The DistilBERT model can be found in `distilbert.ipynb` and is fully functional.
@@ -62,6 +62,7 @@ Now for the Question Answering model.
 Amount of time for each task:
   * DistilBERT model: ~20h (without training time). This was very similar to what I estimated, because I relied heavily on the Huggingface library. Loading the data was easy and the data is already very clean.
   * QA model: ~40h (without training time). Was a lot of effort, as my first approach didn't work and it took me making up a basic POC model, to get to the final architecture.
+  * Application: 2h. Streamlit was really easy to use and fairly straightforward.
   
 ## Data
 - Aaron Gokaslan et al. OpenWebText Corpus. 2019. https://skylion007.github.io/OpenWebTextCorpus/: **OpenWebText**
