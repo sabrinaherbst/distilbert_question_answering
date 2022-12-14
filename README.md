@@ -76,6 +76,7 @@ Amount of time for each task:
 - Kwiatkowski et al. Natural Questions: a Benchmark for Question Answering Research. 2019. https://ai.google.com/research/NaturalQuestions/: **Natural Questions**
   - Also a question-answer set, based on a Google query and corresponding Wikipedia page, containing the answer. 
   - Very similar to the SQuAD dataset. 
+- Yang, Zhilin et al. HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering. https://hotpotqa.github.io/
  
  
 ## Related Papers
