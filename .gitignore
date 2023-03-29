@@ -1,0 +1,5 @@
+data/
+# tokeniser/
+# distilbert/
+.idea
+venv
